@@ -23,7 +23,6 @@ async function bootstrap() {
       'A simple API to vote for your favorite food during office lunch',
     )
     .setVersion('1.0')
-    .addTag('food')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('doc', app, document);

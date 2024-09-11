@@ -10,33 +10,82 @@ import {
 import { MealsService } from './meals.service';
 
 import { CreateMealDto, UpdateMealDto } from './dto/meals.dto';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('meals')
 @Controller('meals')
 export class MealsController {
   constructor(private readonly mealsService: MealsService) {}
 
+  @ApiResponse({
+    status: 201,
+    description: 'The record has been successfully created.',
+  })
+  @ApiResponse({ status: 400, description: 'Bad request' })
   @Post()
-  create(@Body() createMealDto: CreateMealDto) {
-    return this.mealsService.create(createMealDto);
+  async create(@Body() createMealDto: CreateMealDto) {
+    const data = await this.mealsService.create(createMealDto);
+
+    return {
+      message: 'Meal created successfully',
+      data,
+    };
   }
 
+  @ApiResponse({
+    status: 200,
+    description: 'The records have been successfully retrieved.',
+  })
   @Get()
-  findAll() {
-    return this.mealsService.findAll();
+  async findAll() {
+    const data = await this.mealsService.findAll();
+
+    return {
+      data,
+    };
   }
 
+  @ApiResponse({
+    status: 200,
+    description: 'The record has been successfully retrieved.',
+  })
+  @ApiResponse({ status: 404, description: 'Meal not found' })
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.mealsService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    const data = await this.mealsService.findOne(id);
+
+    return {
+      data,
+    };
   }
 
+  @ApiResponse({
+    status: 200,
+    description: 'The record has been successfully updated.',
+  })
+  @ApiResponse({ status: 404, description: 'Meal not found' })
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateMealDto: UpdateMealDto) {
-    return this.mealsService.update(id, updateMealDto);
+  async update(@Param('id') id: string, @Body() updateMealDto: UpdateMealDto) {
+    const data = await this.mealsService.update(id, updateMealDto);
+
+    return {
+      message: 'Meal updated successfully',
+      data,
+    };
   }
 
+  @ApiResponse({
+    status: 200,
+    description: 'The record has been successfully deleted.',
+  })
+  @ApiResponse({ status: 404, description: 'Meal not found' })
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.mealsService.remove(id);
+  async remove(@Param('id') id: string) {
+    const data = await this.mealsService.remove(id);
+
+    return {
+      message: 'Meal deleted successfully',
+      data,
+    };
   }
 }
