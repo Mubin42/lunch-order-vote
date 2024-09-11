@@ -1,14 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
 
 import { DatabaseService } from 'src/database/database.service';
+import { CreateMealDto, UpdateMealDto } from './dto/meals.dto';
 
 @Injectable()
 export class MealsService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   // Create a new meal
-  async create(createMealDto: Prisma.MealCreateInput) {
+  async create(createMealDto: CreateMealDto) {
     return this.databaseService.meal.create({
       data: createMealDto,
     });
@@ -32,7 +32,7 @@ export class MealsService {
     return data;
   }
 
-  async update(id: string, updateMealDto: Prisma.MealUpdateInput) {
+  async update(id: string, updateMealDto: UpdateMealDto) {
     const data = await this.databaseService.meal.update({
       where: { id },
       data: updateMealDto,
