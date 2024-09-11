@@ -6,6 +6,7 @@ import {
   Param,
   Delete,
   Put,
+  Query,
 } from '@nestjs/common';
 import { MealsService } from './meals.service';
 
@@ -39,6 +40,19 @@ export class MealsController {
   @Get()
   async findAll() {
     const data = await this.mealsService.findAll();
+
+    return {
+      data,
+    };
+  }
+
+  @ApiResponse({
+    status: 200,
+    description: 'The records have been successfully retrieved.',
+  })
+  @Get('day')
+  async findByDate(@Query('date') date: string) {
+    const data = await this.mealsService.findByDate(date);
 
     return {
       data,

@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { DatabaseService } from 'src/database/database.service';
 import { CreateMealDto, UpdateMealDto } from './dto/meals.dto';
+import { Day } from '@prisma/client';
 
 @Injectable()
 export class MealsService {
@@ -14,9 +15,17 @@ export class MealsService {
     });
   }
 
-  // Find all meals
   async findAll() {
     return this.databaseService.meal.findMany();
+  }
+
+  // get meals by date
+  async findByDate(date: string) {
+    const day = this.generateDate(date);
+
+    return this.databaseService.meal.findMany({
+      where: { day },
+    });
   }
 
   // Find a single meal by ID
@@ -55,5 +64,33 @@ export class MealsService {
     }
 
     return data;
+  }
+
+  generateDate(date: string): Day {
+    switch (new Date(date).getDay()) {
+      case 0:
+        return Day.SUNDAY;
+
+      case 1:
+        return Day.MONDAY;
+
+      case 2:
+        return Day.TUESDAY;
+
+      case 3:
+        return Day.WEDNESDAY;
+
+      case 4:
+        return Day.THURSDAY;
+
+      case 5:
+        return Day.FRIDAY;
+
+      case 6:
+        return Day.SATURDAY;
+
+      default:
+        return Day.MONDAY;
+    }
   }
 }
