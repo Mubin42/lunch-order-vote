@@ -16,7 +16,11 @@ export class MealsService {
   }
 
   async findAll() {
-    return this.databaseService.meal.findMany();
+    return this.databaseService.meal.findMany({
+      include: {
+        mealItems: true,
+      },
+    });
   }
 
   // get meals by date
@@ -25,6 +29,9 @@ export class MealsService {
 
     return this.databaseService.meal.findMany({
       where: { day },
+      include: {
+        mealItems: true,
+      },
     });
   }
 

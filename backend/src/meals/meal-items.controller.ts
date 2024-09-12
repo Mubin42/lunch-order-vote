@@ -1,10 +1,10 @@
-import { Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { MealItemsService } from './meal-items.service';
-import { CreateMealItemDto } from './dto/meai-items.dto';
+import { CreateMealItemDto } from './dto/meal-items.dto';
 
-@ApiTags('meals')
-@Controller('meals')
+@ApiTags('meal-items')
+@Controller('meal-items')
 export class MealItemsController {
   constructor(private readonly mealItemsService: MealItemsService) {}
 
@@ -14,7 +14,7 @@ export class MealItemsController {
   })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @Post()
-  async create(createMealItemDto: CreateMealItemDto) {
+  async create(@Body() createMealItemDto: CreateMealItemDto) {
     const data = await this.mealItemsService.create(createMealItemDto);
 
     return {
