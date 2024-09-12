@@ -1,7 +1,63 @@
-import { Button, Card, CardBody, CardFooter, Heading, Image, Stack, Text } from '@chakra-ui/react';
+import {
+	Button,
+	Card,
+	CardBody,
+	CardFooter,
+	CardHeader,
+	Flex,
+	Heading,
+	Icon,
+	Image,
+	ListItem,
+	Stack,
+	Tag,
+	Text,
+	UnorderedList,
+} from '@chakra-ui/react';
 import { FC } from 'react';
+import { FaRegThumbsUp } from 'react-icons/fa';
 
 type Props = {};
+
+const data = {
+	id: 'cm0yxu7v000035x2jn4udwe8d',
+	name: 'Chicken Currry Rice',
+	price: 120,
+	restaurantId: 'cm0y507s30000230nonk2u9h6',
+	day: 'THURSDAY',
+	createdAt: '2024-09-12T06:58:17.292Z',
+	updatedAt: '2024-09-12T06:58:17.292Z',
+	restaurant: {
+		name: 'The Pizza Guy',
+		location: 'Banani, Dhaka',
+	},
+	mealItems: [
+		{
+			id: 'cm0yy24z6000158i0kryf20fj',
+			name: 'Chicken Biriyani',
+			quantity: '350 gm',
+			mealId: 'cm0yxu7v000035x2jn4udwe8d',
+			createdAt: '2024-09-12T07:04:26.801Z',
+			updatedAt: '2024-09-12T07:04:26.801Z',
+		},
+		{
+			id: 'cm0yy2mqg000358i0shzxwfaq',
+			name: 'Kebab',
+			quantity: '2 pieces',
+			mealId: 'cm0yxu7v000035x2jn4udwe8d',
+			createdAt: '2024-09-12T07:04:49.816Z',
+			updatedAt: '2024-09-12T07:04:49.816Z',
+		},
+		{
+			id: 'cm0yy2syt000558i0p6uwjeud',
+			name: 'Salad',
+			quantity: '1 pieces',
+			mealId: 'cm0yxu7v000035x2jn4udwe8d',
+			createdAt: '2024-09-12T07:04:57.894Z',
+			updatedAt: '2024-09-12T07:04:57.894Z',
+		},
+	],
+};
 
 const FoodCard: FC<Props> = ({}) => {
 	return (
@@ -14,17 +70,34 @@ const FoodCard: FC<Props> = ({}) => {
 			/>
 
 			<Stack>
+				<CardHeader>
+					<Heading size='md'>{data?.name}</Heading>
+					<Text>{`${data?.restaurant?.name} - ${data?.restaurant?.location}`}</Text>
+				</CardHeader>
 				<CardBody>
-					<Heading size='md'>The perfect latte</Heading>
-
-					<Text py='2'>
-						Caffè latte is a coffee beverage of Italian origin made with espresso and steamed milk.
-					</Text>
+					<Flex mb={4}>
+						<Tag colorScheme='blue'>{data.day}</Tag>
+					</Flex>
+					<Stack spacing={0}>
+						<Text fontWeight={500}>Items</Text>
+						<UnorderedList>
+							{data.mealItems.map((item) => (
+								<ListItem key={item.id}>
+									{item.name} - {item.quantity}
+								</ListItem>
+							))}
+						</UnorderedList>
+					</Stack>
 				</CardBody>
 
 				<CardFooter>
-					<Button variant='solid' colorScheme='blue'>
-						Buy Latte
+					<Button
+						leftIcon={<Icon as={FaRegThumbsUp} />}
+						variant='solid'
+						colorScheme='blue'
+						size='sm'
+					>
+						Vote
 					</Button>
 				</CardFooter>
 			</Stack>

@@ -30,6 +30,9 @@ export class MealsService {
     return this.databaseService.meal.findMany({
       where: { day },
       include: {
+        restaurant: {
+          select: { name: true, location: true },
+        },
         mealItems: true,
       },
     });
