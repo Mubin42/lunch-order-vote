@@ -10,6 +10,12 @@ export type GetEmployeesResponse = {
 	data: Employee[];
 };
 
+export type CreateVoteReqBody = {
+	mealId: string;
+	employeeId?: string;
+	newEmployeeName?: string;
+};
+
 export type Employee = {
 	id: string;
 	name: string;
@@ -27,6 +33,7 @@ export type Meal = {
 	updatedAt: string;
 	restaurant: Restaurant;
 	mealItems: MealItem[];
+	votes: Vote[];
 };
 
 type Restaurant = {
@@ -41,4 +48,9 @@ type MealItem = {
 	mealId: string;
 	createdAt: string;
 	updatedAt: string;
+};
+
+type Vote = {
+	id: string;
+	employee: Employee;
 };

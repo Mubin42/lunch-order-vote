@@ -19,9 +19,10 @@ import {
 	Tabs,
 	useDisclosure,
 } from '@chakra-ui/react';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Meal } from '@/store/services/ServiceTypes';
-import { useGetEmployeesQuery } from '@/store/services/mainApi';
+import { useCreateVoteMutation, useGetEmployeesQuery } from '@/store/services/mainApi';
+import useCustomToast from '@/hooks/useCustomToast';
 
 type Props = {
 	children: React.ReactNode;
@@ -30,9 +31,40 @@ type Props = {
 
 const VoteModal: FC<Props> = ({ children, meal }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
+	// Fetch all employees
 	const { data } = useGetEmployeesQuery();
 
+	// State for input fields
 	const [employeeId, setEmployeeId] = useState<string>('');
+	const [newEmployeeName, setNewEmployeeName] = useState<string>('');
+
+	// API calls to create a vote
+	const [createVote, result] = useCreateVoteMutation();
+
+	useCustomToast({
+		result,
+		successMessage: 'Vote submitted successfully!',
+		errorMessage: 'Failed to submit vote.',
+	});
+
+	// Submit vote
+	const handleSubmit = () => {
+		const body = {
+			mealId: meal?.id || '',
+			employeeId,
+			newEmployeeName,
+		};
+
+		createVote(body);
+	};
+
+	useEffect(() => {
+		if (result.isSuccess) {
+			onClose();
+			setEmployeeId('');
+			setNewEmployeeName('');
+		}
+	}, [result.isSuccess, onClose]);
 
 	return (
 		<>
@@ -40,7 +72,7 @@ const VoteModal: FC<Props> = ({ children, meal }) => {
 
 			<Modal isCentered isOpen={isOpen} onClose={onClose} motionPreset='scale'>
 				<ModalOverlay />
-				<ModalContent minH={{ base: '100vh', lg: '400px' }}>
+				<ModalContent minH={{ base: '100vh', lg: 'auto' }}>
 					<ModalHeader>Vote for {meal?.name}</ModalHeader>
 					<ModalCloseButton />
 					<ModalBody>
@@ -65,13 +97,8 @@ const VoteModal: FC<Props> = ({ children, meal }) => {
 								</TabPanel>
 								<TabPanel>
 									<FormControl>
-										<FormLabel>First name</FormLabel>
-										<Input placeholder='First name' />
-									</FormControl>
-
-									<FormControl mt={4}>
-										<FormLabel>Last name</FormLabel>
-										<Input placeholder='Last name' />
+										<FormLabel>Employee Name</FormLabel>
+										<Input placeholder='Name' />
 									</FormControl>
 								</TabPanel>
 							</TabPanels>
@@ -82,7 +109,9 @@ const VoteModal: FC<Props> = ({ children, meal }) => {
 						<Button variant='ghost' mr={3} onClick={onClose}>
 							Close
 						</Button>
-						<Button colorScheme='blue'>Submit</Button>
+						<Button colorScheme='blue' onClick={handleSubmit} isLoading={result.isLoading}>
+							Submit
+						</Button>
 					</ModalFooter>
 				</ModalContent>
 			</Modal>

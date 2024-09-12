@@ -1,6 +1,6 @@
 import { URL } from '@/lib/constants';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { GetEmployeesResponse, GetMealResponse, GetMealsResponse } from './ServiceTypes';
+import { CreateVoteReqBody, GetEmployeesResponse, GetMealsResponse } from './ServiceTypes';
 
 type TagType = 'meal' | 'employee';
 
@@ -37,9 +37,17 @@ export const mainApi = createApi({
 			}),
 			providesTags: ['employee'],
 		}),
+		createVote: builder.mutation<any, CreateVoteReqBody>({
+			query: (body) => ({
+				url: 'votes',
+				method: 'POST',
+				body,
+			}),
+			invalidatesTags: ['meal', 'employee'],
+		}),
 	}),
 });
 
-export const { useGetMealsQuery, useGetEmployeesQuery } = mainApi;
+export const { useGetMealsQuery, useGetEmployeesQuery, useCreateVoteMutation } = mainApi;
 
 export default mainApi;
