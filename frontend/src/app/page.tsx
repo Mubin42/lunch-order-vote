@@ -30,7 +30,7 @@ export default function Home() {
 	const { data, isSuccess, isLoading } = useGetMealsQuery({ params: { date } });
 
 	// Check if there are no votes applied to any meal
-	const noVotes = data?.data?.every((meal) => meal.votes.length === 0);
+	const isAnyVote = data?.data?.some((meal) => meal?.votes?.length === 1) || false;
 
 	// Function to go to the next day
 	const next = () => {
@@ -108,7 +108,7 @@ export default function Home() {
 			<Stack px={BASE_PADDING}>
 				{head}
 				{isLoading && <Text>Loading...</Text>}
-				{isSuccess && noVotes && (
+				{isSuccess && !isAnyVote && (
 					<Alert status='info' variant='left-accent'>
 						<AlertIcon />
 						{`No votes have been cast. Be the first to vote for today's meals!`}
@@ -118,7 +118,7 @@ export default function Home() {
 					<Text>No meals found for this date</Text>
 				) : (
 					data?.data?.map((meal, index) => (
-						<FoodCard key={meal.id} data={meal} isWinner={meal.votes.length > 0 && index === 0} />
+						<FoodCard key={meal.id} data={meal} isWinner={meal?.votes?.length > 0 && index === 0} />
 					))
 				)}
 			</Stack>

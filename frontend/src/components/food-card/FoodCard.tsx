@@ -46,7 +46,7 @@ const FoodCard: FC<Props> = ({ data, isWinner = false }) => {
 					<Tag colorScheme='gray'>{data?.day}</Tag>
 					<Tag colorScheme='blue' variant='outline' gap={1}>
 						<Icon as={FaRegThumbsUp} />
-						{data?.votes.length} Votes
+						{data?.votes?.length || 0} Votes
 					</Tag>
 				</Flex>
 				<Stack spacing={0}>
