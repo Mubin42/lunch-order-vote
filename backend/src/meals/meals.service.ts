@@ -46,6 +46,11 @@ export class MealsService {
           },
         },
       },
+      orderBy: {
+        votes: {
+          _count: 'desc',
+        },
+      },
     });
   }
 

@@ -86,7 +86,11 @@ const VoteModal: FC<Props> = ({ children, meal }) => {
 								<TabPanel>
 									<FormControl>
 										<FormLabel>Select Employee</FormLabel>
-										<Select value={employeeId} onChange={(e) => setEmployeeId(e.target.value)}>
+										<Select
+											placeholder='Select Employee'
+											value={employeeId}
+											onChange={(e) => setEmployeeId(e.target.value)}
+										>
 											{data?.data.map((employee) => (
 												<option
 													key={employee.id}
