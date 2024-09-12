@@ -4,7 +4,7 @@ import { VoteService } from './vote.service';
 import { CreateVoteDto } from './dtos/vote.dto';
 
 @ApiTags('Vote')
-@Controller('vote')
+@Controller('votes')
 export class VoteController {
   constructor(private readonly voteService: VoteService) {}
 

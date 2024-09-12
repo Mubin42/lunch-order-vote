@@ -34,6 +34,17 @@ export class MealsService {
           select: { name: true, location: true },
         },
         mealItems: true,
+        votes: {
+          select: {
+            id: true,
+            employee: {
+              select: {
+                name: true,
+                id: true,
+              },
+            },
+          },
+        },
       },
     });
   }
