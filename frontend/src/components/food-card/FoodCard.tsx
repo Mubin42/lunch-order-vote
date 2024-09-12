@@ -1,3 +1,4 @@
+import { Meal } from '@/store/services/ServiceTypes';
 import {
 	Button,
 	Card,
@@ -17,49 +18,11 @@ import {
 import { FC } from 'react';
 import { FaRegThumbsUp } from 'react-icons/fa';
 
-type Props = {};
-
-const data = {
-	id: 'cm0yxu7v000035x2jn4udwe8d',
-	name: 'Chicken Currry Rice',
-	price: 120,
-	restaurantId: 'cm0y507s30000230nonk2u9h6',
-	day: 'THURSDAY',
-	createdAt: '2024-09-12T06:58:17.292Z',
-	updatedAt: '2024-09-12T06:58:17.292Z',
-	restaurant: {
-		name: 'The Pizza Guy',
-		location: 'Banani, Dhaka',
-	},
-	mealItems: [
-		{
-			id: 'cm0yy24z6000158i0kryf20fj',
-			name: 'Chicken Biriyani',
-			quantity: '350 gm',
-			mealId: 'cm0yxu7v000035x2jn4udwe8d',
-			createdAt: '2024-09-12T07:04:26.801Z',
-			updatedAt: '2024-09-12T07:04:26.801Z',
-		},
-		{
-			id: 'cm0yy2mqg000358i0shzxwfaq',
-			name: 'Kebab',
-			quantity: '2 pieces',
-			mealId: 'cm0yxu7v000035x2jn4udwe8d',
-			createdAt: '2024-09-12T07:04:49.816Z',
-			updatedAt: '2024-09-12T07:04:49.816Z',
-		},
-		{
-			id: 'cm0yy2syt000558i0p6uwjeud',
-			name: 'Salad',
-			quantity: '1 pieces',
-			mealId: 'cm0yxu7v000035x2jn4udwe8d',
-			createdAt: '2024-09-12T07:04:57.894Z',
-			updatedAt: '2024-09-12T07:04:57.894Z',
-		},
-	],
+type Props = {
+	data: Meal;
 };
 
-const FoodCard: FC<Props> = ({}) => {
+const FoodCard: FC<Props> = ({ data }) => {
 	return (
 		<Card direction={{ base: 'column', sm: 'row' }} overflow='hidden' variant='outline'>
 			<Image

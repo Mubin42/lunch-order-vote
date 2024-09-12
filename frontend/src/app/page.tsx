@@ -1,16 +1,18 @@
 'use client';
 import FoodCard from '@/components/food-card/FoodCard';
 import PageLayout from '@/components/layouts/PageLayout';
-import Navbar from '@/components/navbar/Navbar';
 import { getDay } from '@/functions/getDay';
 import { BASE_PADDING } from '@/lib/constants';
-import { Flex, Heading, Input, Select, Stack, Tag, Text } from '@chakra-ui/react';
+import { useGetMealsQuery } from '@/store/services/mainApi';
+import { Flex, Heading, Input, Stack, Tag, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 
 export default function Home() {
 	const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
 
 	const day = getDay(date);
+
+	const { data } = useGetMealsQuery({ params: { date } });
 
 	const head = (
 		<Flex
@@ -50,12 +52,11 @@ export default function Home() {
 		<PageLayout>
 			<Stack px={BASE_PADDING}>
 				{head}
-				<FoodCard />
-				<FoodCard />
-				<FoodCard />
-				<FoodCard />
-				<FoodCard />
-				<FoodCard />
+				{data?.data ? (
+					data?.data?.map((meal) => <FoodCard key={meal.id} data={meal} />)
+				) : (
+					<Text>No Items Today</Text>
+				)}
 			</Stack>
 		</PageLayout>
 	);

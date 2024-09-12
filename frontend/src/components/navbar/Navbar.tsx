@@ -7,7 +7,7 @@ type Props = {};
 const Navbar: FC<Props> = ({}) => {
 	return (
 		<Flex
-			flex={1}
+			w='full'
 			h={{ base: '48px', lg: '64px' }}
 			bgColor='blue.300'
 			align='center'

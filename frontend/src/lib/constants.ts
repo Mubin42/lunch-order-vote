@@ -1,5 +1,5 @@
 export const URL = {
-	root: '',
+	root: `${process.env.NEXT_PUBLIC_BACKEND}`,
 };
 
 export const breakpoints = {

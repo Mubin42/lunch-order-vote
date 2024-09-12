@@ -50,7 +50,7 @@ export class MealsController {
     status: 200,
     description: 'The records have been successfully retrieved.',
   })
-  @Get('day')
+  @Get('daily')
   async findByDate(@Query('date') date: string) {
     const data = await this.mealsService.findByDate(date);
 
