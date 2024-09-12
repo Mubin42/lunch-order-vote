@@ -17,9 +17,10 @@ import {
 } from '@chakra-ui/react';
 import { FC } from 'react';
 import { FaRegThumbsUp } from 'react-icons/fa';
+import VoteModal from '../vote-modal/VoteModal';
 
 type Props = {
-	data: Meal;
+	data?: Meal;
 };
 
 const FoodCard: FC<Props> = ({ data }) => {
@@ -39,12 +40,12 @@ const FoodCard: FC<Props> = ({ data }) => {
 				</CardHeader>
 				<CardBody>
 					<Flex mb={4}>
-						<Tag colorScheme='blue'>{data.day}</Tag>
+						<Tag colorScheme='blue'>{data?.day}</Tag>
 					</Flex>
 					<Stack spacing={0}>
 						<Text fontWeight={500}>Items</Text>
 						<UnorderedList>
-							{data.mealItems.map((item) => (
+							{data?.mealItems.map((item) => (
 								<ListItem key={item.id}>
 									{item.name} - {item.quantity}
 								</ListItem>
@@ -54,14 +55,16 @@ const FoodCard: FC<Props> = ({ data }) => {
 				</CardBody>
 
 				<CardFooter>
-					<Button
-						leftIcon={<Icon as={FaRegThumbsUp} />}
-						variant='solid'
-						colorScheme='blue'
-						size='sm'
-					>
-						Vote
-					</Button>
+					<VoteModal meal={data}>
+						<Button
+							leftIcon={<Icon as={FaRegThumbsUp} />}
+							variant='solid'
+							colorScheme='blue'
+							size='sm'
+						>
+							Vote
+						</Button>
+					</VoteModal>
 				</CardFooter>
 			</Stack>
 		</Card>

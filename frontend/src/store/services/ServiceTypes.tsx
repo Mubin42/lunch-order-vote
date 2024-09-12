@@ -2,6 +2,21 @@ export type GetMealsResponse = {
 	data: Meal[];
 };
 
+export type GetMealResponse = {
+	data: Meal;
+};
+
+export type GetEmployeesResponse = {
+	data: Employee[];
+};
+
+export type Employee = {
+	id: string;
+	name: string;
+	createdAt: string;
+	updatedAt: string;
+};
+
 export type Meal = {
 	id: string;
 	name: string;

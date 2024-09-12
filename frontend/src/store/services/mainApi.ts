@@ -1,12 +1,17 @@
 import { URL } from '@/lib/constants';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { GetMealsResponse } from './ServiceTypes';
+import { GetEmployeesResponse, GetMealResponse, GetMealsResponse } from './ServiceTypes';
+
+type TagType = 'meal' | 'employee';
+
+const tags: TagType[] = ['meal', 'employee'];
 
 export const mainApi = createApi({
 	reducerPath: 'mainApi',
 	baseQuery: fetchBaseQuery({
 		baseUrl: `${URL.root}`,
 	}),
+	tagTypes: tags,
 
 	endpoints: (builder) => ({
 		getMeals: builder.query<
@@ -22,10 +27,19 @@ export const mainApi = createApi({
 				method: 'GET',
 				params,
 			}),
+			providesTags: ['meal'],
+		}),
+
+		getEmployees: builder.query<GetEmployeesResponse, void>({
+			query: () => ({
+				url: 'employees',
+				method: 'GET',
+			}),
+			providesTags: ['employee'],
 		}),
 	}),
 });
 
-export const { useGetMealsQuery } = mainApi;
+export const { useGetMealsQuery, useGetEmployeesQuery } = mainApi;
 
 export default mainApi;

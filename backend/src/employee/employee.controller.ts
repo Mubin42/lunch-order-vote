@@ -1,10 +1,10 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { EmployeeService } from './employee.service';
 import { CreateEmployeeDto } from './dtos/employee.dto';
 
 @ApiTags('employee')
-@Controller('employee')
+@Controller('employees')
 export class EmployeeController {
   constructor(private readonly employeeService: EmployeeService) {}
 
@@ -14,7 +14,7 @@ export class EmployeeController {
   })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @Post()
-  async create(createEmployeeDto: CreateEmployeeDto) {
+  async create(@Body() createEmployeeDto: CreateEmployeeDto) {
     const data = await this.employeeService.create(createEmployeeDto);
 
     return {

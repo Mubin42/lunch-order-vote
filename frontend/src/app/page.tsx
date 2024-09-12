@@ -52,11 +52,7 @@ export default function Home() {
 		<PageLayout>
 			<Stack px={BASE_PADDING}>
 				{head}
-				{data?.data ? (
-					data?.data?.map((meal) => <FoodCard key={meal.id} data={meal} />)
-				) : (
-					<Text>No Items Today</Text>
-				)}
+				{data?.data && data?.data?.map((meal) => <FoodCard key={meal.id} data={meal} />)}
 			</Stack>
 		</PageLayout>
 	);

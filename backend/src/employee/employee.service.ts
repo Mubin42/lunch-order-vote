@@ -7,7 +7,7 @@ export class EmployeeService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   async create(createEmployeeDto: CreateEmployeeDto) {
-    return this.databaseService.employee.create({
+    return await this.databaseService.employee.create({
       data: createEmployeeDto,
     });
   }
