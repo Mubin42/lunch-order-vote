@@ -39,8 +39,12 @@ const FoodCard: FC<Props> = ({ data }) => {
 					<Text>{`${data?.restaurant?.name} - ${data?.restaurant?.location}`}</Text>
 				</CardHeader>
 				<CardBody>
-					<Flex mb={4}>
-						<Tag colorScheme='blue'>{data?.day}</Tag>
+					<Flex mb={4} gap={2}>
+						<Tag colorScheme='gray'>{data?.day}</Tag>
+						<Tag colorScheme='blue' variant='outline' gap={1}>
+							<Icon as={FaRegThumbsUp} />
+							{data?.votes.length} Votes
+						</Tag>
 					</Flex>
 					<Stack spacing={0}>
 						<Text fontWeight={500}>Items</Text>

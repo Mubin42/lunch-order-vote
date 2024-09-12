@@ -98,7 +98,11 @@ const VoteModal: FC<Props> = ({ children, meal }) => {
 								<TabPanel>
 									<FormControl>
 										<FormLabel>Employee Name</FormLabel>
-										<Input placeholder='Name' />
+										<Input
+											value={newEmployeeName}
+											onChange={(e) => setNewEmployeeName(e.target.value)}
+											placeholder='Name'
+										/>
 									</FormControl>
 								</TabPanel>
 							</TabPanels>
