@@ -49,7 +49,7 @@ model Meal {
 
 model MealItem {
   id        String   @id @default(cuid())
-  name      String   @unique
+  name      String
   quantity  String
   mealId    String
   createdAt DateTime @default(now())

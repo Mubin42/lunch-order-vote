@@ -88,8 +88,14 @@ const VoteModal: FC<Props> = ({ children, meal }) => {
 										<FormLabel>Select Employee</FormLabel>
 										<Select value={employeeId} onChange={(e) => setEmployeeId(e.target.value)}>
 											{data?.data.map((employee) => (
-												<option key={employee.id} value={employee.id}>
-													{employee.name}
+												<option
+													key={employee.id}
+													value={employee.id}
+													disabled={meal?.votes.some((vote) => vote.employee.id === employee.id)}
+												>
+													{meal?.votes.some((vote) => vote.employee.id === employee.id)
+														? `${employee.name} - Already Voted`
+														: employee.name}
 												</option>
 											))}
 										</Select>

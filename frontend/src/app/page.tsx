@@ -12,7 +12,7 @@ export default function Home() {
 
 	const day = getDay(date);
 
-	const { data } = useGetMealsQuery({ params: { date } });
+	const { data, isSuccess, isLoading } = useGetMealsQuery({ params: { date } });
 
 	const head = (
 		<Flex
@@ -52,7 +52,12 @@ export default function Home() {
 		<PageLayout>
 			<Stack px={BASE_PADDING}>
 				{head}
-				{data?.data && data?.data?.map((meal) => <FoodCard key={meal.id} data={meal} />)}
+				{isLoading && <Text>Loading...</Text>}
+				{isSuccess && !data?.data?.length ? (
+					<Text>No meals found for this date</Text>
+				) : (
+					data?.data?.map((meal) => <FoodCard key={meal.id} data={meal} />)
+				)}
 			</Stack>
 		</PageLayout>
 	);
