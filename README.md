@@ -16,7 +16,7 @@ Create a full-stack app with a Next.js frontend, Nest.js backend, and PostgreSQL
 
 - [x] Api Management for restaurant, menu, menu items, and votes.
 
-- [ ] Endpoints to create and list restaurants, allow voting, and display the daily winner.
+- [x] Endpoints to create and list restaurants, allow voting, and display the daily winner.
 
 - [x] Provide Swagger/OpenAPI documentation.
 
@@ -24,9 +24,9 @@ Create a full-stack app with a Next.js frontend, Nest.js backend, and PostgreSQL
 
 - [x] Display restaurants and food packs.
 
-- [ ] Simple UI for voting and showing the daily winner.
+- [x] Simple UI for voting and showing the daily winner.
 
-- [ ] Use server-side rendering.
+- [ ] Use server-side rendering. (Incomplete as Chakra UI Does not support SSR)
 
 - [x] Additional: Query and Caching Management using Redux Toolkit and RTK Query.
 
@@ -38,11 +38,11 @@ Create a full-stack app with a Next.js frontend, Nest.js backend, and PostgreSQL
 
 ### Dockerization
 
-- [ ] Containerize the frontend, backend, and database.
+- [x] Containerize the frontend, backend, and database.
 
-- [ ] Set up Docker Compose for the multi-container app.
+- [x] Set up Docker Compose for the multi-container app.
 
-- [ ] Include health checks for containers.
+- [x] Include health checks for containers.
 
 ## Getting Started
 
@@ -65,7 +65,7 @@ After successful launch, go to the following URL in your browser.
 
 - Frontend: [http://localhost:3000](http://localhost:3000/)
 - Backend: [http://localhost:5000](http://localhost:5000)
-- Swagger: [http://localhost:5000/docs](http://localhost:3000/)
+- Swagger: [http://localhost:5000/docs](http://localhost:5000/docs)
 
 Containers have dependencies, but the next container may start to be started before the preparation is complete. If it fails for that reason, please specify the start-up separately as follows.
 
