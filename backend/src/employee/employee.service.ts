@@ -6,6 +6,7 @@ import { CreateEmployeeDto } from './dtos/employee.dto';
 export class EmployeeService {
   constructor(private readonly databaseService: DatabaseService) {}
 
+  
   async create(createEmployeeDto: CreateEmployeeDto) {
     return await this.databaseService.employee.create({
       data: createEmployeeDto,

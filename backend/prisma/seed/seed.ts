@@ -4,12 +4,14 @@ import { employees, restaurants } from './seedData';
 const prisma = new PrismaClient();
 
 async function main() {
+  // Truncate all tables before seeding
   const tables = ['Restaurant', 'Meal', 'MealItem', 'Employee', 'Vote'];
 
   for (const table of tables) {
     await prisma.$executeRawUnsafe(`TRUNCATE "${table}" CASCADE`);
   }
 
+  // Add employees
   for (const employee of employees) {
     await prisma.employee.create({
       data: {
@@ -18,6 +20,7 @@ async function main() {
     });
   }
 
+  // Add restaurants, meals and meal items
   for (const data of restaurants) {
     const restaurant = await prisma.restaurant.create({
       data: {

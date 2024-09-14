@@ -16,7 +16,7 @@ export class EmployeeController {
   @Post()
   async create(@Body() createEmployeeDto: CreateEmployeeDto) {
     const data = await this.employeeService.create(createEmployeeDto);
-
+    
     return {
       message: 'Employee created successfully',
       data,

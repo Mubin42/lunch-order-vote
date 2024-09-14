@@ -17,6 +17,7 @@ async function bootstrap() {
     }),
   );
 
+  // Swagger global settings
   const config = new DocumentBuilder()
     .setTitle('Food Voting API')
     .setDescription(

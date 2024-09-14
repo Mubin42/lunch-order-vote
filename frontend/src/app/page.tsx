@@ -107,7 +107,9 @@ export default function Home() {
 		<PageLayout>
 			<Stack px={BASE_PADDING}>
 				{head}
+				{/* Loading Message */}
 				{isLoading && <Text>Loading...</Text>}
+				{/* If no votes are cast, alert will be shown */}
 				{isSuccess && !isAnyVote && (
 					<Alert status='info' variant='left-accent'>
 						<AlertIcon />
