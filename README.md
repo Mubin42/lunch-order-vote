@@ -20,6 +20,8 @@ Create a full-stack app with a Next.js frontend, Nest.js backend, and PostgreSQL
 
 - [x] Provide Swagger/OpenAPI documentation.
 
+- [x] Additional: Postman documentation.
+
 ### Frontend (Next.js)
 
 - [x] Display restaurants and food packs.
@@ -70,5 +72,7 @@ After successful launch, go to the following URL in your browser.
 Containers have dependencies, but the next container may start to be started before the preparation is complete. If it fails for that reason, please specify the start-up separately as follows.
 
     docker-compose up db
+
+Also postman exported json can be found at `/postman/Food Vote.postman_collection.json` directory. Import it as v2.1 collection in postman.
 
 See `docker-compose.yaml` if you want to know more.
